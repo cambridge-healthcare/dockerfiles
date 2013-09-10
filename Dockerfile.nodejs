@@ -1,0 +1,9 @@
+FROM ubuntu:12.04
+MAINTAINER How are you? "docker@howareyou.com"
+
+RUN apt-get install -y python
+RUN apt-get install -y python-software-properties
+RUN apt-get install -y make
+RUN apt-get install -y g++
+RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu precise universe" && apt-get update -y
+RUN add-apt-repository -y "ppa:chris-lea/node.js" && apt-get update -y && apt-get install -y nodejs

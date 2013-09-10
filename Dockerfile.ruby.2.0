@@ -1,0 +1,5 @@
+FROM howareyou/ruby-build_20130806
+MAINTAINER How are you? "docker@howareyou.com"
+
+RUN ruby-build -v 2.0.0-p247 /usr/local/lib/2.0.0-p247
+RUN ln -s /usr/local/lib/2.0.0-p247/bin/* /usr/local/bin/
