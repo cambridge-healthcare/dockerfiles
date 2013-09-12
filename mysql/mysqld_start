@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Pass these variables when starting a new docker container, eg:
+# docker run -e DB=app -e DB_USER=app -e DB_PASSWORD=app_password howareyou/mysql_stable
+
+mysqld_safe &
+
+host="${HOST:-%}"
+mysql_commands=("CREATE DATABASE $DB;")
+mysql_commands+=("GRANT ALL ON $DB.* TO '$DB_USER'@'$host' IDENTIFIED BY '$DB_PASSWORD';")
+mysql_commands+=("FLUSH PRIVILEGES;")
+
+for _i in {1..10}
+do
+  if [[ -e /var/run/mysqld/mysqld.pid ]]
+  then
+    echo "${mysql_commands[@]}" | mysql
+    tail -f /var/log/mysql.log /var/log/mysql.err
+  else
+    sleep 0.5
+  fi
+done
+
+exit 1
