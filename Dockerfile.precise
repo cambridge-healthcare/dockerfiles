@@ -1,0 +1,9 @@
+FROM ubuntu:12.04
+MAINTAINER How are you? "docker@howareyou.com"
+
+RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90forceyes
+RUN echo 'deb http://archive.ubuntu.com/ubuntu precise main universe' > /etc/apt/sources.list
+RUN apt-get update
+
+RUN dpkg-divert --local --rename --add /sbin/initctl
+RUN ln -s /bin/true /sbin/initctl
