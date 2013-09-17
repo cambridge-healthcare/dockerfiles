@@ -1,9 +1,7 @@
-FROM ubuntu:12.04
+FROM howareyou/precise
 MAINTAINER How are you? "docker@howareyou.com"
 
-RUN apt-get install -y python-software-properties
-RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu precise universe" && apt-get update -y
-RUN apt-get install -y build-essential
+RUN apt-get install build-essential
 ADD http://download.redis.io/releases/redis-2.6.16.tar.gz /usr/local/src/redis-2.6.16.tar.gz
 RUN cd /usr/local/src && tar -zxvf redis-2.6.16.tar.gz
 RUN cd /usr/local/src/redis-2.6.16 && make && make install
