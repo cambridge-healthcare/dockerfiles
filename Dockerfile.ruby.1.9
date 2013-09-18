@@ -1,5 +1,11 @@
 FROM howareyou/ruby-build_20130806
 MAINTAINER How are you? "docker@howareyou.com"
 
-RUN ruby-build -v 1.9.3-p448 /usr/local/lib/1.9.3-p448
-RUN ln -s /usr/local/lib/1.9.3-p448/bin/* /usr/local/bin/
+ENV HOME /root
+ENV RUBY_VERSION 1.9.3-p448
+ENV PATH /usr/local/lib/$RUBY_VERSION/bin:$PATH
+
+RUN ruby-build -v $RUBY_VERSION /usr/local/lib/$RUBY_VERSION
+
+RUN echo "gem: --no-rdoc --no-ri" > /root/.gemrc
+RUN gem install bundler foreman pry

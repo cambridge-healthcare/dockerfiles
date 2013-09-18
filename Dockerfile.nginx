@@ -1,11 +1,13 @@
-FROM ubuntu:12.04
+FROM howareyou/precise
 MAINTAINER How are you? "docker@howareyou.com"
 
-RUN apt-get install -y python-software-properties
-RUN add-apt-repository -y ppa:nginx/stable && apt-get update -y
-RUN apt-get install -y nginx
+RUN apt-get install python-software-properties
+RUN add-apt-repository -y ppa:nginx/stable && apt-get update
 
-CMD nginx && /bin/bash
+RUN apt-get install nginx
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+
+CMD nginx
 
 EXPOSE 80
 EXPOSE 443

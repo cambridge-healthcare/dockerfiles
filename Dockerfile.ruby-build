@@ -1,9 +1,9 @@
-FROM ubuntu:12.04
+FROM howareyou/precise
 MAINTAINER How are you? "docker@howareyou.com"
 
-RUN apt-get install -y make
-RUN apt-get install -y libssl-dev
-RUN apt-get install -y zlib1g-dev
-RUN apt-get install -y ca-certificates
+RUN apt-get install make
+RUN apt-get install libssl-dev
+RUN apt-get install zlib1g-dev
+RUN apt-get install ca-certificates
 ADD https://github.com/sstephenson/ruby-build/archive/v20130806.tar.gz /usr/local/src/v20130806.tar.gz
 RUN tar -zxvf /usr/local/src/v20130806.tar.gz && cd /usr/local/src/ruby-build-20130806 && sh install.sh
