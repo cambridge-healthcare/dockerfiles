@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -x
+set -e
+
+# To pull repos from github we need - surprise, surprise - git
+#
+install_git() {
+  apt-get install git-core
+}
+
+# This sets up some global git configs, including github credentials
+# There are 2 requirements for this:
+#   1. git >= 1.7.10
+#   2. git pull via https
+#
+# More info:
+#   * https://www.kernel.org/pub/software/scm/git/docs/git-credential-store.html
+#   * https://help.github.com/articles/set-up-git
+#
+# If you're worried about storing github CI user credentials in plaintext, the
+# alternatives aren't any better. Feel free to disagree in an e-mail to docker@howareyou.com.
+#
+configure_git() {
+  git config --global user.name "$GIT_USER_NAME"
+  git config --global user.email "$GIT_USER_EMAIL"
+  git config --global credential.helper store
+  echo "https://$GITHUB_USER:$GIHUB_PASS@github.com" > $HOME/.git-credentials
+}
+
+install_git
+configure_git
