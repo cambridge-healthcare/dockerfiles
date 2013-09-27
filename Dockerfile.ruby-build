@@ -1,9 +1,13 @@
 FROM howareyou/precise
 MAINTAINER How are you? "docker@howareyou.com"
 
-RUN apt-get install make
+ENV RUBY_BUILD_VERSION 20130806
+
+RUN apt-get install build-essential
 RUN apt-get install libssl-dev
 RUN apt-get install zlib1g-dev
+RUN apt-get install libreadline-dev
 RUN apt-get install ca-certificates
-ADD https://github.com/sstephenson/ruby-build/archive/v20130806.tar.gz /usr/local/src/v20130806.tar.gz
-RUN tar -zxvf /usr/local/src/v20130806.tar.gz && cd /usr/local/src/ruby-build-20130806 && sh install.sh
+
+RUN wget -O - https://github.com/sstephenson/ruby-build/archive/v$RUBY_BUILD_VERSION.tar.gz | tar -C /usr/local/src -zxv
+RUN cd /usr/local/src/ruby-build-$RUBY_BUILD_VERSION && sh install.sh
