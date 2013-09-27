@@ -1,12 +1,11 @@
 FROM howareyou/precise
 MAINTAINER How are you? "docker@howareyou.com"
 
+ENV REDIS_VERSION 2.6.16
+
 RUN apt-get install build-essential
-ADD http://download.redis.io/releases/redis-2.6.16.tar.gz /usr/local/src/redis-2.6.16.tar.gz
-RUN cd /usr/local/src && tar -zxvf redis-2.6.16.tar.gz
-RUN cd /usr/local/src/redis-2.6.16 && make && make install
+RUN wget -O - http://download.redis.io/releases/redis-$REDIS_VERSION.tar.gz | tar -C /usr/local/src -zxv
+RUN cd /usr/local/src/redis-$REDIS_VERSION && make && make install
 RUN sysctl vm.overcommit_memory=1
 
 CMD redis-server
-
-EXPOSE 6379
