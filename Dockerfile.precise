@@ -7,3 +7,5 @@ RUN apt-get update
 
 RUN dpkg-divert --local --rename --add /sbin/initctl
 RUN ln -s /bin/true /sbin/initctl
+
+RUN apt-get install wget
