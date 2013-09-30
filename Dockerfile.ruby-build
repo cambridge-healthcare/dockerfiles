@@ -1,13 +1,4 @@
 FROM howareyou/precise
-MAINTAINER How are you? "docker@howareyou.com"
+# MAINTAINER How are you? "docker@howareyou.com"
 
-ENV RUBY_BUILD_VERSION 20130806
-
-RUN apt-get install build-essential
-RUN apt-get install libssl-dev
-RUN apt-get install zlib1g-dev
-RUN apt-get install libreadline-dev
-RUN apt-get install ca-certificates
-
-RUN wget -O - https://github.com/sstephenson/ruby-build/archive/v$RUBY_BUILD_VERSION.tar.gz | tar -C /usr/local/src -zxv
-RUN cd /usr/local/src/ruby-build-$RUBY_BUILD_VERSION && sh install.sh
+RUN echo "export RUBY_BUILD_VERSION=20130806" >> /.profile; . /.profile; apt-get install build-essential libssl-dev zlib1g-dev libreadline-dev ca-certificates; wget -O - https://github.com/sstephenson/ruby-build/archive/v$RUBY_BUILD_VERSION.tar.gz | tar -C /usr/local/src -zxv; cd /usr/local/src/ruby-build-$RUBY_BUILD_VERSION && sh install.sh

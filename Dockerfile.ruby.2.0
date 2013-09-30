@@ -1,10 +1,4 @@
-FROM howareyou/ruby-build_20130806
-MAINTAINER How are you? "docker@howareyou.com"
+FROM howareyou/ruby-build:20130806
+# MAINTAINER How are you? "docker@howareyou.com"
 
-ENV RUBY_VERSION 2.0.0-p247
-ENV PATH /usr/local/lib/$RUBY_VERSION/bin:$PATH
-
-RUN ruby-build -v $RUBY_VERSION /usr/local/lib/$RUBY_VERSION
-
-RUN echo "gem: --no-rdoc --no-ri" > /root/.gemrc
-RUN gem install bundler foreman pry
+RUN echo "export RUBY_VERSION=2.0.0-p247" >> /.profile; echo "export PATH=/usr/local/lib/$RUBY_VERSION/bin:$PATH" >> /.profile; . /.profile; ruby-build -v $RUBY_VERSION /usr/local/lib/$RUBY_VERSION; echo "gem: --no-rdoc --no-ri" > /root/.gemrc; gem install bundler foreman pry
