@@ -1,4 +1,4 @@
-FROM howareyou/precise
+FROM howareyou/ubuntu:12.04
 # MAINTAINER How are you? "docker@howareyou.com"
 
 RUN echo "export RUBY_BUILD_VERSION=20130806" >> /.profile; . /.profile; apt-get install build-essential libssl-dev zlib1g-dev libreadline-dev ca-certificates; wget -O - https://github.com/sstephenson/ruby-build/archive/v$RUBY_BUILD_VERSION.tar.gz | tar -C /usr/local/src -zxv; cd /usr/local/src/ruby-build-$RUBY_BUILD_VERSION && sh install.sh
