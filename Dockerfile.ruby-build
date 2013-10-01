@@ -1,9 +1,11 @@
 FROM howareyou/ubuntu:12.04
 # MAINTAINER How are you? "docker@howareyou.com"
 
-RUN echo "export RUBY_BUILD_VERSION=20130806" >> /.profile;\
-. /.profile;\
-apt-get install build-essential libssl-dev zlib1g-dev libreadline-dev ca-certificates;\
-ruby_build_url="https://github.com/sstephenson/ruby-build/archive/v$RUBY_BUILD_VERSION.tar.gz";\
-wget -O - $ruby_build_url | tar -C /usr/local/src -zxv;\
-cd /usr/local/src/ruby-build-$RUBY_BUILD_VERSION && sh install.sh
+RUN \
+  echo "export RUBY_BUILD_VERSION=20130806" >> /.profile ;\
+  . /.profile ;\
+  apt-get install build-essential libssl-dev zlib1g-dev libreadline-dev ca-certificates ;\
+  ruby_build_url="https://github.com/sstephenson/ruby-build/archive/v$RUBY_BUILD_VERSION.tar.gz" ;\
+  wget -O - $ruby_build_url | tar -C /usr/local/src -zxv ;\
+  cd /usr/local/src/ruby-build-$RUBY_BUILD_VERSION && sh install.sh
+# END RUN
