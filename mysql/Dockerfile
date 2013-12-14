@@ -1,13 +1,12 @@
-FROM howareyou/precise
-MAINTAINER How are you? "docker@howareyou.com"
+FROM howareyou/ubuntu:12.04
+# MAINTAINER How are you? "docker@howareyou.com"
 
-ENV DEBIAN_FRONTEND noninteractive
-
-RUN echo "mysql-server-5.5 mysql-server/start_on_boot boolean false" | debconf-set-selections
-
-RUN chmod 777 /tmp
-
-RUN apt-get -q install mysql-server-5.5
+RUN \
+  . /.profile ;\
+  echo "mysql-server-5.5 mysql-server/start_on_boot boolean false" | debconf-set-selections ;\
+  chmod 777 /tmp ;\
+  apt-get install mysql-server-5.5 ;\
+# END RUN
 
 ADD mysql-listen.cnf /etc/mysql/conf.d/mysql-listen.cnf
 ADD mysqld_start /mysqld_start

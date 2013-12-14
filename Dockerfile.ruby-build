@@ -1,13 +1,15 @@
-FROM howareyou/precise
-MAINTAINER How are you? "docker@howareyou.com"
+FROM howareyou/ubuntu:12.04
+# MAINTAINER How are you? "docker@howareyou.com"
 
-ENV RUBY_BUILD_VERSION 20130806
-
-RUN apt-get install build-essential
-RUN apt-get install libssl-dev
-RUN apt-get install zlib1g-dev
-RUN apt-get install libreadline-dev
-RUN apt-get install ca-certificates
-
-RUN wget -O - https://github.com/sstephenson/ruby-build/archive/v$RUBY_BUILD_VERSION.tar.gz | tar -C /usr/local/src -zxv
-RUN cd /usr/local/src/ruby-build-$RUBY_BUILD_VERSION && sh install.sh
+RUN \
+  echo "export RUBY_BUILD_VERSION=20131024" >> /.profile ;\
+  . /.profile ;\
+  apt-get install build-essential libffi-dev libreadline-dev libyaml-dev zlib1g-dev ;\
+  apt-get install libsqlite3-dev libmysqlclient-dev libmemcached-dev libmagickwand-dev ;\
+  apt-get install libev-dev libevent-dev ;\
+  apt-get install libssl-dev libcurl4-openssl-dev curl openssl ca-certificates ;\
+  apt-get install libxml2 libxml2-dev libxslt1-dev ;\
+  ruby_build_url="https://github.com/sstephenson/ruby-build/archive/v$RUBY_BUILD_VERSION.tar.gz" ;\
+  wget -O - $ruby_build_url | tar -C /usr/local/src -zxv ;\
+  cd /usr/local/src/ruby-build-$RUBY_BUILD_VERSION && sh install.sh
+# END RUN
