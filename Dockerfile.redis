@@ -10,3 +10,4 @@ RUN \
 # END RUN
 
 CMD redis-server
+EXPOSE 6379
