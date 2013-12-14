@@ -2,7 +2,7 @@ FROM howareyou/ubuntu:12.04
 # MAINTAINER How are you? "docker@howareyou.com"
 
 RUN \
-  echo "export RUBY_BUILD_VERSION=20131024" >> /.profile ;\
+  echo "export RUBY_BUILD_VERSION=20131211" >> /.profile ;\
   . /.profile ;\
   apt-get install build-essential libffi-dev libreadline-dev libyaml-dev zlib1g-dev ;\
   apt-get install libsqlite3-dev libmysqlclient-dev libmemcached-dev libmagickwand-dev ;\
