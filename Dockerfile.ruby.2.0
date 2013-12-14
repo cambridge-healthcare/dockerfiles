@@ -1,4 +1,4 @@
-FROM howareyou/ruby-build:20130806
+FROM howareyou/ruby-build:20131024
 # MAINTAINER How are you? "docker@howareyou.com"
 
 RUN \
